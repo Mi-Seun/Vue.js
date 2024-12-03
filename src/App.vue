@@ -1,69 +1,54 @@
 <template>
-	<h1>Cinema</h1>
+	<Navbar/>
+	<h1>Information du cinema</h1>
 	<div v-for="(movie, i) in data" :key="i" class="item">
 		<figure>
 			<img :src="`${movie.imgUrl}`" :alt="movie.title">
 		</figure>
-		<div>
-			<h3 class="bg-yellow" :style="textRed">{{ movie.title}}</h3>
-		</div>
+
+
 		<div class="info">
+			<div>
+				<h3 class="bg-yellow" :style="textRed">{{ movie.title}}</h3>
+			</div>
 			<p>Date de sortie : {{ movie.year}}</p>
 			<p>Genre : {{ movie.category}}</p>
 			<button 
-				@:click="increseLike(i)">Aimer
+				@:click="increseLike(i)">Aime
 			</button>
 			<span>{{ movie.like }}</span>
+			<p>
+				<button @click="isModal=true; selecteMovie=i">Voir plus</button>
+			</p>
 		</div>
 	</div>
+	<Modal />
+
 </template>
 
 <script>
+import data from './assets/movies.js';
+import NavbarComponent from "./components/Navbar.vue";
+import ModalComponent from "./components/Modal.vue";
+
 export default {
 	name: 'App',
 	data() {
 		return {
-			data: [
-				{
-					title: "Star Wars",
-					year: '1977',
-					category: "Science Fiction",
-					textRed:  "color: blue",
-					like: 0,
-					imgUrl: "./assets/images/1.jpg",
-				},
-				{
-					title: "Avatar",
-					year: '2009',
-					category: "Science Fiction/Fantasy",
-					textRed:  "color: green",
-					like: 0,
-					imgUrl: "./assets/images/2.jpg",
-				},
-				{			
-					title: "Inception",
-					year: '2010',
-					category: "Action/Thriller",
-					textRed:  "color: red",
-					like: 0,
-					imgUrl: "./assets/images/3.jpg",
-				},
-				{
-					title: "The Dark Knight",
-                    year: '2008',
-                    category: "Action/Crime",
-                    textRed:  "color: orange",
-					like: 0,
-					imgUrl: "./assets/images/4.jpg",
-				}
-			]
-		}
+			isModal: false,
+			data : data,
+			selecteMovie: 0,
+			}
 	},
-	methods: {
+	methods: { //functions
         increseLike(i) {
 			this.data[i].like += 1;
         }
-    }
+    },
+	components: {
+		Navbar: NavbarComponent,
+		Modal: ModalComponent,
+    },
 }
 </script>
 
@@ -81,56 +66,56 @@ body {
 }
 
 h1, h2, h3 {
-	text-align: center;
-	margin-bottom: 20px;
-	font-weight: bold;
-	color: #333;
-	text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
-	text-transform: uppercase;
-	letter-spacing: 1px;
-	line-height: 1.2;
+	margin-bottom: 1rem;
 }
 
-.item {
-    margin-bottom: 30px;
-	background-color: rgba(255, 255, 255, 0.9);
-	border-radius: 5px;
-	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-	align-self: start;
-	text-align: center;
-}
-
-img {
-	width: 100%;
-    max-width: 300px;
-    object-fit: cover;
-    border-radius: 5px;
-	transition: transform 0.3s ease-in-out;
-	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-	align-items: center;
-
-}
-.info {
-	margin-top: 10px;
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	flex-wrap: wrap;
-	padding: 10px;
-	background-color: rgba(255, 255, 255, 0.8);
-	border-radius: 5px;
-
+p {
+	margin-bottom: 0.5rem;
 }
 
 button {
-	background-color: red;
-	color: aliceblue;
-	padding: 10px;
-	border: none;
-	border-radius: 5px;
-	cursor: pointer;
-	transition: background-color 0.3s ease-in-out;
 	margin-right: 10px;
+	margin-top: 1rem;
+	padding: 5px 10px;
+}
+
+.item {
+	width: 100%;
+	border-radius: 1px solid;
+	display: flex;
+	background-color: #f5f5f5;
+	padding: 10px;
+}
+
+.item img{
+	width: 100%;
+}
+
+.item figure{
+	width: 30%;
+	margin-right: 1rem;
+}
+
+.item .info {
+	width: 100%;
+}
+
+.modal{
+	background-color: antiquewhite;
+	position:fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.modal.inner {
+	background-color: rgba(0, 0, 0, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+    width: 80%;
 }
 
 </style>
