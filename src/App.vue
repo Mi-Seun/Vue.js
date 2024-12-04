@@ -1,62 +1,55 @@
 <template>
-	<Navbar/>
-
-	<Event :text="text"/> <!--속성명(props 변수) = "보낼 값" -->
-
-	<h1>Information du cinema</h1>
-	<div v-for="(movie, i) in data" :key="i" class="item">
-		<figure>
-			<img :src="`${movie.imgUrl}`" :alt="movie.title">
-		</figure>
-
-
-		<div class="info">
-			<div>
-				<h3 class="bg-yellow" :style="textRed">{{ movie.title}}</h3>
-			</div>
-			<p>Date de sortie : {{ movie.year}}</p>
-			<p>Genre : {{ movie.category}}</p>
-			<button 
-				@:click="increseLike(i)">Aime
-			</button>
-			<span>{{ movie.like }}</span>
-			<p>
-				<button @click="isModal=true; selecteMovie=i">Voir plus</button>
-			</p>
-		</div>
-	</div>
-<!-- <Modal /> -->
-
+	<Navbar />
+	<Event :text="text" />
+	<Movies 
+		:data="data"
+		@openModal="isModal=true; selecteMovie=$event"
+		@increseLike="increseLike($event)"
+	/>
+	
+	<Modal 
+		:data="data" 
+		:isModal="isModal" 
+		:selecteMovie="selecteMovie" 
+		@closeModal="isModal = false" 
+	/>
 </template>
 
 <script>
-import data from './assets/movies.js';
-import NavbarComponent from "./components/Navbar.vue";
-import EventComponent from "./components/Event.vue";
-//import ModalComponent from "./components/Modal.vue";
+// 자식 컴포넌트 가져오기
+import data from './assets/movies.js'; // data film
+import NavbarComponent from "./components/Navbar.vue"; // navbar
+import EventComponent from "./components/Event.vue"; // event box
+import ModalComponent from "./components/Modal.vue"; // modal
+import MoviesComponent from "./components/Movies.vue"; // movies
 
 export default {
 	name: 'App',
+	// 데이터
 	data() {
-		return {
-			isModal: false,
-			data: data,
-			selecteMovie: 0,
-			text: "coucou aaa bbb",
-			}
+	return {
+		isModal: false,
+		data: data,
+		selecteMovie: null,
+		text: "Star Wars is back in France",
+	};
 	},
-	methods: { //functions
-        increseLike(i) {
-			this.data[i].like += 1;
-        }
-    },
-	components: {
-		Navbar: NavbarComponent,
-		//Modal: ModalComponent,
-		Event: EventComponent
-    },
-}
+	// 함수
+	methods: { 
+	increseLike(i) {
+		this.data[i].like += 1;
+	}
+	},
+	// 컴포넌트 등록
+	components: { 
+	Navbar: NavbarComponent,
+	Modal: ModalComponent,
+	Event: EventComponent,
+	Movies: MoviesComponent,
+	},
+};
 </script>
+
 
 <style>
 * {
@@ -87,7 +80,7 @@ button {
 
 .item {
 	width: 100%;
-	border-radius: 1px solid;
+	border: 1px ; 
 	display: flex;
 	background-color: #f5f5f5;
 	padding: 10px;
@@ -107,9 +100,9 @@ button {
 }
 
 .modal{
-	background-color: antiquewhite;
+	background-color: rgb(145, 210, 226);
 	position:fixed;
-	top: 0;
+	top: 60px;
 	left: 0;
 	width: 100%;
 	display: flex;
