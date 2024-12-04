@@ -6,7 +6,7 @@ const data = [
 			category: "Science Fiction",
 			textRed:  "color: blue",
 			like: 0,
-			imgUrl: "./assets/images/1.jpg",
+			imgUrl: "./assets/images/starWars.jpg",
 		},
 		{
 			title: "Avatar",
@@ -14,7 +14,7 @@ const data = [
 			category: "Science Fiction/Fantasy",
 			textRed:  "color: green",
 			like: 0,
-			imgUrl: "./assets/images/2.jpg",
+			imgUrl: "./assets/images/avtar.webp",
 		},
 		{			
 			title: "Inception",
@@ -22,7 +22,7 @@ const data = [
 			category: "Action/Thriller",
 			textRed:  "color: red",
 			like: 0,
-			imgUrl: "./assets/images/3.jpg",
+			imgUrl: "./assets/images/insection.webp",
 		},
 		{
 			title: "The Dark Knight",
@@ -30,7 +30,7 @@ const data = [
 			category: "Action/Crime",
 			textRed:  "color: orange",
 			like: 0,
-			imgUrl: "./assets/images/4.jpg",
+			imgUrl: "./assets/images/big.jpg",
 		}
 	]
 

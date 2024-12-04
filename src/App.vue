@@ -99,22 +99,5 @@ button {
 	width: 100%;
 }
 
-.modal{
-	background-color: rgb(145, 210, 226);
-	position:fixed;
-	top: 60px;
-	left: 0;
-	width: 100%;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-}
-
-.modal.inner {
-	background-color: rgba(0, 0, 0, 0.8);
-    padding: 20px;
-    border-radius: 10px;
-    width: 80%;
-}
 
 </style>
