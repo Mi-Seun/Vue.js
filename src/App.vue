@@ -1,5 +1,8 @@
 <template>
 	<Navbar/>
+
+	<Event :text="text"/> <!--속성명(props 변수) = "보낼 값" -->
+
 	<h1>Information du cinema</h1>
 	<div v-for="(movie, i) in data" :key="i" class="item">
 		<figure>
@@ -22,22 +25,24 @@
 			</p>
 		</div>
 	</div>
-	<Modal />
+<!-- <Modal /> -->
 
 </template>
 
 <script>
 import data from './assets/movies.js';
 import NavbarComponent from "./components/Navbar.vue";
-import ModalComponent from "./components/Modal.vue";
+import EventComponent from "./components/Event.vue";
+//import ModalComponent from "./components/Modal.vue";
 
 export default {
 	name: 'App',
 	data() {
 		return {
 			isModal: false,
-			data : data,
+			data: data,
 			selecteMovie: 0,
+			text: "coucou aaa bbb",
 			}
 	},
 	methods: { //functions
@@ -47,7 +52,8 @@ export default {
     },
 	components: {
 		Navbar: NavbarComponent,
-		Modal: ModalComponent,
+		//Modal: ModalComponent,
+		Event: EventComponent
     },
 }
 </script>
